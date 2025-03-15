@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Logo</div>
+        <button class="login-btn" onclick="showLogin()">Login</button>
+    </header>
+
+    <!-- Login Form -->
+    <div id="loginForm" class="container hidden">
+        <button class="close-btn" onclick="closeForm('loginForm')">&times;</button>
+        <h2>Login</h2>
+        <div class="input-group">
+            <input type="email" placeholder="Email">
+        </div>
+        <div class="input-group">
+            <input type="password" placeholder="Password">
+        </div>
+        <div class="options">
+            <label><input type="checkbox"> Remember me</label>
+            <a href="#">Forgot Password?</a>
+        </div>
+        <button class="submit-btn">Login</button>
+        <p>Don't have an account? <a href="#" onclick="showRegister()">Register</a></p>
+    </div>
+
+    <!-- Registration Form -->
+    <div id="registerForm" class="container hidden">
+        <button class="close-btn" onclick="closeForm('registerForm')">&times;</button>
+        <h2>Registration</h2>
+        <div class="input-group">
+            <input type="text" placeholder="Username">
+        </div>
+        <div class="input-group">
+            <input type="email" placeholder="Email">
+        </div>
+        <div class="input-group">
+            <input type="password" placeholder="Password">
+        </div>
+        <label><input type="checkbox"> I agree to the terms & conditions</label>
+        <button class="submit-btn">Register</button>
+        <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+    </div>
+
+    <script>
+        function showLogin() {
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+        }
+        function showRegister() {
+            document.getElementById('registerForm').classList.remove('hidden');
+            document.getElementById('loginForm').classList.add('hidden');
+        }
+        function closeForm(formId) {
+            document.getElementById(formId).classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
