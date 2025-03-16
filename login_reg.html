@@ -5,21 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login & Registration</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <header>
-        <div class="logo">Logo</div>
-        <button class="login-btn" onclick="showLogin()">Login</button>
+        <div class="logo">
+            <img src="moneybag.png" alt="Logo" class="logo-icon">
+            <i>Traibino</i>
+        </div>
     </header>
 
     <!-- Login Form -->
-    <div id="loginForm" class="container hidden">
-        <button class="close-btn" onclick="closeForm('loginForm')">&times;</button>
-        <h2>Login</h2>
+    <div id="loginForm" class="container">
+        <h2>User Login</h2>
         <div class="input-group">
+            <i class="fa-solid fa-envelope"></i>
             <input type="email" placeholder="Email">
         </div>
         <div class="input-group">
+            <i class="fa-solid fa-lock"></i>
             <input type="password" placeholder="Password">
         </div>
         <div class="options">
@@ -32,7 +36,6 @@
 
     <!-- Registration Form -->
     <div id="registerForm" class="container hidden">
-        <button class="close-btn" onclick="closeForm('registerForm')">&times;</button>
         <h2>Registration</h2>
         <div class="input-group">
             <input type="text" placeholder="Username">
@@ -49,16 +52,18 @@
     </div>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById('loginForm').classList.add('fade-in'); // Add fade-in effect
+        });
+
         function showLogin() {
             document.getElementById('loginForm').classList.remove('hidden');
             document.getElementById('registerForm').classList.add('hidden');
         }
+
         function showRegister() {
             document.getElementById('registerForm').classList.remove('hidden');
             document.getElementById('loginForm').classList.add('hidden');
-        }
-        function closeForm(formId) {
-            document.getElementById(formId).classList.add('hidden');
         }
     </script>
 </body>

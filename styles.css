@@ -1,4 +1,8 @@
 /* General Styles */
+* {
+    font-family: 'Outfit';
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -8,7 +12,22 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: url('background.jpg') no-repeat center center/cover;
+    background: url('background2.jpg') no-repeat center center/cover;
+    position: relative; /* Required for pseudo-element positioning */
+    overflow: hidden; /* Prevent scrolling */
+}
+
+/* Blurred Background */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('background2.jpg') no-repeat center center/cover;
+    filter: blur(20px); /* Apply blur effect */
+    z-index: -1; /* Place it behind the content */
 }
 
 header {
@@ -22,18 +41,33 @@ header {
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
+    display: flex;
+    align-items: center; /* Ensures vertical alignment */
+    gap: 8px; /* Adjusts spacing between icon and text */
 }
+
+.logo-icon {
+    width: 30px; /* Adjust size as needed */
+    height: 30px; /* Ensures a consistent height */
+    vertical-align: middle; /* Helps with alignment */
+}
+
+.logo i {
+    font-style: normal; /* Keeps text styling clean */
+    font-size: 25px; /* Adjust font size if needed */
+    margin-left: -9px;
+}
+
 
 .login-btn {
     background: transparent;
-    border: 2px solid white;
+    border: none;
     color: white;
-    padding: 10px 20px;
+    padding: 10px 0px;
     font-size: 1rem;
     cursor: pointer;
     border-radius: 5px;
+    font-size: 20px;
 }
 
 /* Form Container */
@@ -44,11 +78,33 @@ header {
     transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0.7);
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 30px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     width: 350px;
     text-align: center;
     color: white;
+    height: 73vh;
+    opacity: 0; /* Start with 0 opacity */
+    animation: fadeIn 2.0s ease-in-out forwards; /* Apply the fade-in animation */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.container:hover {
+    transform: translate(-50%, -50%) scale(1.01); /* Combine translate and scale */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Add a subtle box shadow */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Start fully transparent */
+    }
+    to {
+        opacity: 1; /* End fully visible */
+    }
+}
+
+.container h2 {
+    padding-bottom: 30px;
 }
 
 .hidden {
@@ -62,14 +118,39 @@ h2 {
 .input-group {
     position: relative;
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 10px;
+    padding-top: px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    height:35px;
+}
+
+.input-group i {
+    color: white; /* Adjust color as needed */
+    margin-right: 10px;
+    font-size: 18px;
 }
 
 .input-group input {
-    width: 100%;
-    padding: 10px;
-    padding-left: 30px;
+    width: 100%;  /* Makes the input take the full width of the container */
+    padding: 10px; /* Adds padding for better spacing */
+    border-radius: 5px; /* Optional: Rounds the corners */
+    box-sizing: border-box; /* Ensures padding and border are included in the width */
+    font-size: 16px; /* Adjusts font size for readability */
+    flex: 1;
+    background: transparent;
     border: none;
-    border-radius: 5px;
+    outline: none;
+    color: white;
+    font-size: 16px;
+}
+
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .input-group .icon {
@@ -85,15 +166,42 @@ h2 {
     font-size: 0.9rem;
 }
 
+.options a {
+    color: white; /* Makes the text white */
+    text-decoration: none; /* Removes the underline */
+    font-style: italic; /* Italicizes the text */
+}
+
+.options a:focus,
+.options a:active {
+    outline: none; /* Removes the highlight when clicked */
+    box-shadow: none; /* Ensures no focus outline */
+}
+
 .submit-btn {
-    width: 100%;
-    padding: 10px;
-    background: #333;
-    color: white;
+    width: 50%;
+    background: rgba(255, 255, 255, 0.632);
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px; /* Adjusted padding for better height */
+    margin: 5px;
+    margin-top: 20px;
+    margin-bottom: 30px;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px; /* Rounded edges */
     cursor: pointer;
-    margin-top: 10px;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Soft shadow */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block; /* Ensures it respects text alignment */
+    text-align: center; /* Centers text inside the button */
+}
+
+.submit-btn:hover {
+    background: rgba(255, 255, 255, 0.3); /* Slight fade effect */
+    color: rgba(255, 255, 255, 0.63);
 }
 
 p {
