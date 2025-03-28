@@ -6,13 +6,14 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
+    border: none;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: url('background2.jpg') no-repeat center center/cover;
+    background: url('bckgrnd.jpeg') no-repeat center center/cover;
     position: relative; /* Required for pseudo-element positioning */
     overflow: hidden; /* Prevent scrolling */
 }
@@ -25,7 +26,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('background2.jpg') no-repeat center center/cover;
+    background: url('bckgrnd.jpeg') no-repeat center center/cover;
     filter: blur(20px); /* Apply blur effect */
     z-index: -1; /* Place it behind the content */
 }
@@ -87,6 +88,9 @@ header {
     opacity: 0; /* Start with 0 opacity */
     animation: fadeIn 2.0s ease-in-out forwards; /* Apply the fade-in animation */
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    animation: none !important;
+    opacity: 1 !important;
+    
 }
 
 .container:hover {
@@ -104,6 +108,15 @@ header {
 }
 
 .container h2 {
+    padding-bottom: 30px;
+}
+
+.reset h2 {
+    padding-bottom: 0px;
+}    
+
+.reset p {
+    padding-top: 0px;
     padding-bottom: 30px;
 }
 
@@ -227,3 +240,8 @@ p a:hover {
     color: white;
     cursor: pointer;
 }
+
+/*End of login and reg CSS
+
+/*Dashboard CSS Start*/
+
