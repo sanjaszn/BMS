@@ -13,7 +13,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: url('bckgrnd.jpeg') no-repeat center center/cover;
+    background: url('IMGS/bckgrnd.jpeg') no-repeat center center/cover;
     position: relative; /* Required for pseudo-element positioning */
     overflow: hidden; /* Prevent scrolling */
 }
@@ -26,7 +26,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('bckgrnd.jpeg') no-repeat center center/cover;
+    background: url('IMGS/background.jpeg') no-repeat center center/cover;
     filter: blur(20px); /* Apply blur effect */
     z-index: -1; /* Place it behind the content */
 }

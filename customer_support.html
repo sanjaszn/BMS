@@ -6,11 +6,11 @@
     <title>Customer Support</title>
     <link rel="stylesheet" href="dash.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="customer_support.css">
 </head>
 <body>
     <div class="app-container">
         <div class="sidebar">
-
             <div class="logo">
                 <img src="moneybag.png" alt="Logo" class="logo-icon">
                 <i>Traibino</i>
@@ -75,9 +75,211 @@
             </div>
         </div>
         <div class="main-content">
-            <h2>Customer Support</h2>
-            <p>Track and respond to customer queries.</p>
-        </div>    
+            <div class="support-header">
+                <div class="support-title">
+                    <h2>Customer Support</h2>
+                    <p>Track and respond to customer queries</p>
+                </div>
+                <div class="support-actions">
+                    <div class="search-container">
+                        <input type="text" id="ticketSearch" placeholder="Search tickets...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="filter-container">
+                        <select id="priorityFilter">
+                            <option value="all">All Priorities</option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                    <div class="filter-container">
+                        <select id="statusFilter">
+                            <option value="all">All Statuses</option>
+                            <option value="open">Open</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="resolved">Resolved</option>
+                            <option value="closed">Closed</option>
+                        </select>
+                    </div>
+                    <button id="newTicketBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> New Ticket
+                    </button>
+                </div>
+            </div>
+
+            <div class="support-dashboard">
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-icon open">
+                            <i class="fas fa-ticket-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="openTicketsCount">0</h3>
+                            <p>Open Tickets</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon progress">
+                            <i class="fas fa-spinner"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="inProgressCount">0</h3>
+                            <p>In Progress</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon resolved">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="resolvedCount">0</h3>
+                            <p>Resolved Today</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon response">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="avgResponseTime">0h</h3>
+                            <p>Avg. Response Time</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tickets-container">
+                    <div class="tickets-header">
+                        <h3>Support Tickets</h3>
+                        <div class="view-options">
+                            <button class="view-btn active" data-view="list">
+                                <i class="fas fa-list"></i>
+                            </button>
+                            <button class="view-btn" data-view="grid">
+                                <i class="fas fa-th-large"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="tickets-list view-active" id="ticketsList">
+                        <div class="tickets-list-header">
+                            <div class="ticket-col ticket-id">Ticket ID</div>
+                            <div class="ticket-col customer">Customer</div>
+                            <div class="ticket-col subject">Subject</div>
+                            <div class="ticket-col category">Category</div>
+                            <div class="ticket-col priority">Priority</div>
+                            <div class="ticket-col status">Status</div>
+                            <div class="ticket-col date">Date</div>
+                            <div class="ticket-col assigned">Assigned To</div>
+                        </div>
+                        
+                        <div class="tickets-list-body" id="ticketsListBody">
+                            <!-- Tickets will be loaded here -->
+                            <div class="loader" id="ticketsLoader">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <span>Loading tickets...</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tickets-grid" id="ticketsGrid">
+                        <!-- Grid view tickets will be loaded here -->
+                    </div>
+                    
+                    <div class="pagination">
+                        <button class="pagination-btn" id="prevPage" disabled>
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </button>
+                        <div class="pagination-info">
+                            Page <span id="currentPage">1</span> of <span id="totalPages">1</span>
+                        </div>
+                        <button class="pagination-btn" id="nextPage">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!-- Ticket Details Modal -->
+    <div id="ticketModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ticket Details</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body" id="ticketDetails">
+                <!-- Ticket details will be loaded here -->
+            </div>
+            <div class="modal-footer" id="ticketActions">
+                <!-- Action buttons will be added here based on ticket status -->
+            </div>
+        </div>
+    </div>
+
+    <!-- New Ticket Modal -->
+    <div id="newTicketModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Ticket</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="newTicketForm">
+                    <div class="form-group">
+                        <label for="customerSelect">Customer</label>
+                        <select id="customerSelect" required>
+                            <option value="">Select Customer</option>
+                            <!-- Customer options will be loaded here -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ticketSubject">Subject</label>
+                        <input type="text" id="ticketSubject" required placeholder="Brief description of the issue">
+                    </div>
+                    <div class="form-group">
+                        <label for="ticketCategory">Category</label>
+                        <select id="ticketCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="account">Account Issues</option>
+                            <option value="transaction">Transaction Problems</option>
+                            <option value="loan">Loan Inquiries</option>
+                            <option value="card">Card Services</option>
+                            <option value="online">Online Banking</option>
+                            <option value="mobile">Mobile App</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ticketPriority">Priority</label>
+                        <select id="ticketPriority" required>
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ticketDescription">Description</label>
+                        <textarea id="ticketDescription" rows="5" required placeholder="Detailed description of the customer's issue"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="assigneeSelect">Assign To</label>
+                        <select id="assigneeSelect">
+                            <option value="">Unassigned</option>
+                            <option value="self" selected>Myself</option>
+                            <!-- Other agent options will be loaded here -->
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelTicketBtn">Cancel</button>
+                <button class="btn btn-primary" id="createTicketBtn">Create Ticket</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="customer_support.js"></script>
 </body>
 </html>

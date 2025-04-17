@@ -10,7 +10,7 @@
 <body>
     <header>
         <div class="logo">
-            <img src="moneybag.png" alt="Logo" class="logo-icon">
+            <img src="IMGS/moneybag.png" alt="Logo" class="logo-icon">
             <i>Traibino</i>
         </div>
     </header>
@@ -87,24 +87,29 @@
     </div>
 
     <script>
-        function showLogin() {
+        function showLogin() {      
             document.getElementById('loginForm').classList.remove('hidden');
             document.getElementById('registerForm').classList.add('hidden');
             document.getElementById('passwordReset').classList.add('hidden');     
         }  
 
-        function showRegister() {
+        function showRegister() {    
             document.getElementById('registerForm').classList.remove('hidden');
             document.getElementById('loginForm').classList.add('hidden');    
         }
 
         function showReset() {
             document.getElementById('loginForm').classList.add('hidden');
-            document.getElementById('registerForm').classList.add('hidden');~
+            document.getElementById('registerForm').classList.add('hidden');
             document.getElementById('passwordReset').classList.remove('hidden');   
         }
 
-
+        function resetForms() {
+        document.getElementById('loginForm').reset();
+        document.getElementById('registerForm').reset();
+        document.getElementById('passwordReset').reset();
+        document.getElementById('password').reset();
+    }
         
     </script>
 </body>
