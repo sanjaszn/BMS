@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +19,7 @@
     <!-- Login Form -->
     
     <form id="loginForm" class="container" action="bankms.php" method="POST">
+     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
         <h2>User Login</h2>
         <div class="input-group">
             <i class="fa-solid fa-envelope"></i>
@@ -37,6 +39,7 @@
 
     <!-- Registration Form -->
     <form id="registerForm" class="container hidden" action="bankms.php" method="POST">
+     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
         <h2>Registration</h2>
         <div class="input-group">
             <i class="fa-solid fa-user"></i>
